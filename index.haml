@@ -1,0 +1,378 @@
+!!! 5
+%html
+  %head
+    %meta{ :charset=>"utf-8"}
+    %meta{ "http-equiv"=>"X-UA-Compatible", :content=>"IE=edge,chrome=1"}
+    %title Node.js
+    %meta{ :name=>"viewport" , :content=>"width=1024, user-scalable=no"}
+    %link{ :rel=>"stylesheet" , :href=>"css/core/deck.core.css"}
+    %link{ :rel=>"stylesheet" , :href=>"css/extensions/goto/deck.goto.css"}
+    %link{ :rel=>"stylesheet" , :href=>"css/extensions/menu/deck.menu.css"}
+    %link{ :rel=>"stylesheet" , :href=>"css/extensions/status/deck.status.css"}
+    %link{ :rel=>"stylesheet" , :href=>"css/extensions/hash/deck.hash.css"}
+    %link{ :rel=>"stylesheet" , :id=>"style-theme-link" , :href=>"css/neon.css"}
+    %link{ :rel=>"stylesheet" , :id=>"transition-theme-link" , :href=>"css/fade.css"}
+    %link{ :rel=>"stylesheet" , :href=>"css/pres.css"}
+    %link{ :rel=>"stylesheet" , :href=>"css/sunburst.css"}
+      
+  %body.deck-container.with-asides{:onload=>"prettyPrint()"}
+    
+    %section.slide#title-slide
+      %img{:src=>'images/nodejs.png'}
+      #my-info
+        %h3 Hello, I'm Filipe Regadas
+        %h4 
+          %a{:href=>"#"} filipe (at) regadas (d0t) org
+        %h4 
+          %a{:href=>"http://filipe.regadas.org"} http://filipe.regadas.org
+        %h4 
+          %a{:href=>"http://github.com/regadas"} http://github.com/regadas
+        %h4 
+          %a{:href=>"http://twitter.com/regadas"} @regadas
+        %h4
+          %a{:href=>"http://groups.google.com/group/nodejs-pt"} nodejs-pt
+        %h4
+          %a{:href=>"http://groups.google.com/group/scala-pt"} scala-pt
+
+    %section.slide#this-is-not
+      %h1 This is not ...
+          
+    %section.slide#in-brief
+      %h2 in brief ...
+      %aside
+        %ul
+          %li
+            %p Started by Ryan Dahl
+          %li
+            %p Server-side Javascript
+          %li
+            %p Built on Google V8
+          %li
+            %p Evented, non blocking I/o
+          %li
+            %p Similar to Twisted or EventMachine 
+          %li
+            %p CommonJS module system
+
+      %aside
+        %img{:src=>"images/ryan.jpg"}
+
+
+    %section.slide#reason
+      %h2 Reason ...
+      %ul
+        %li
+          %p Normally programs behave like this ... 
+          %pre.prettyprint
+            :preserve
+              var result = db.query("select ...");
+
+    %section.slide#more-reason
+      %h2 More Reasons ...
+      %ul
+        %li
+          %p I/O needs to be done differently 
+        %li
+          %p Better software multitask
+        %li
+          %p Threads are cool! many can run at the same time
+        %li
+          %p We have many differents types so .... CHOOSE YOUR DESTINY!
+        %li
+          %p Context switch is not for free!! 
+        %li
+          %p Stacks can eat a lot of memory
+        %li
+          %p Nasty locking problems
+
+    %section.slide
+      %h1 Building lightweight scalable network application can be cumbersome!
+
+    %section.slide
+      %h1 What about event loop? 
+
+    %section.slide
+      %h1 Real world apps use it ...
+
+    %section.slide
+      %h1
+        %img{:src=>"images/nginx.jpg"}
+
+    %section.slide
+      %h1
+        %img{:src=>"images/nginx-chart1.png"}
+      %a{:href=>"http://blog.webfaction.com/a-little-holiday-present"} taken from webfaction
+
+    %section.slide
+      %h1
+        %img{:src=>"images/nginx-chart2.png"}
+      %a{:href=>"http://blog.webfaction.com/a-little-holiday-present"} taken from webfaction
+
+    %section.slide
+      %h1 Awesome :)
+
+    %section.slide#more-more-reason
+      %h2 So ...
+      %ul
+        %li
+          %p Code like this ...
+          %pre.prettyprint
+            :preserve
+              var result = db.query("select ...");
+        %li
+          %p We have to do some multitask
+      %ul.slide
+        %li
+          %p But code like this ...
+          %pre.prettyprint
+            :preserve
+              db.query("select ...", function(result){
+                 // do some awesome stuff with result
+              });
+        %li
+          %p returns to the event loop
+
+    %section.slide
+      %h1 Why isn't this used more?
+
+    %section.slide#cultural
+      %h2 Cultural Bias ...
+      %ul
+        %li
+          %p The first type of programs that we are taught to do
+          %pre.prettyprint
+            :escaped
+              var str = stdin.gets()
+              var resp = http_client.post("http://some.awesome.host.com/str", {data: str})
+              if(resp == 200) {
+                // do other stuff
+              } else {
+                // handle error
+              } 
+    %section.slide#cultural-cont
+      %h2 Cultural Bias ...
+      %ul
+        %li
+          %p But what about this?
+          %pre.prettyprint
+            :escaped
+              stdin.gets(function(str) {
+                http_client.post("http://some.awesome.host.com/str", {data: str}, function(resp) {
+                  if(resp == 200) {
+                    // do other stuff
+                  } else {
+                    // handle error
+                  }
+                })
+              })
+        %li.slide
+          %p Many ppl think and tend to run away
+      
+    %section.slide#infra
+      %h2 Infrastructure
+      %ul
+        %li
+          %p Event loop requires non-blocking I/O
+        %li
+          %p But ... Most libs aren't
+
+    %section.slide#infra
+      %h2 More ...
+      %ul
+        %li
+          %p Twisted and EventMachine are good event loop platforms
+        %li
+          %p We can get all the good stuff
+        %li
+          %p You must understand ao to integrate other libs
+        %li
+          %p You need to know about event loops
+
+    %section.slide#js
+      %h2 JavaScript
+      %ul
+        %li
+          %p Evented Language
+        %li
+          %p Anonymous functions and closures
+        %li
+          %p One callback at a time
+        %li
+          %p No need to lock on vars
+        %li
+          %p I/O is done through callbacks
+
+    %section.slide#node
+      %h1
+        %img{:src=>'images/nodejs.png'}
+
+    %section.slide#nodejs-built
+      %h2 built to ..
+      %ul
+        %li
+          %p Provide a purely evented env
+        %li
+          %p Be "non-block"
+        %li
+          %p Be "higly-concurrent"
+        %li
+          %p Provides the missing infrastructure
+
+    %section.slide#design
+      %h2 Design
+      %ul
+        %li
+          %p Does not make I/O directly
+        %li
+          %p It's low level
+        %li
+          %p Stream everything
+        %li
+          %p 
+            JS familiar API i.e
+            %strong setTimeout
+        %li
+          %p Platform independent
+        %li
+          %p Built-in support for
+          %ul
+            %li TCP
+            %li DNS
+            %li HTTP
+            %li UDP
+            %li ...
+
+    %section.slide#hello
+      %h2 Hello World
+      %pre.prettyprint
+        :escaped
+          setTimemout(function(){
+            console.log("World")
+          }, 2000)
+          console.log("Hello")
+
+    %section.slide#another-hello
+      %h2 Another Hello World
+      %pre.prettyprint
+        :escaped
+          var EventEmitter = require('events').EventEmitter,
+              emitter = new EventEmitter();
+
+          setTimeout(function(){
+            emitter.emit("say", "Hello World")
+          }, 2000) 
+
+          emitter.addListener("say", function(what){
+            console.log(what)
+          })
+
+    %section.slide#tcp
+      %h2 Simple TCP Server
+      %pre.prettyprint
+        :escaped
+          var net = require('net');
+
+          String.prototype.chomp = function (){
+            return this.replace(/(\n|\r)+$/, '');
+          }
+
+          var server = net.createServer(function (c) {
+              c.on("connect", function () {
+                  console.info("Connection from " + c.remoteAddress);
+                  c.write("Hello Stranger\n");
+              });
+              c.on('data', function(data){
+                  if(data.toString().chomp() === 'trigger timer') {
+                    setTimeout(function() {
+                      c.write("Hey man here I am after 2 seconds\n");
+                    }, 2000)
+                  } else {
+                    console.log('Stranger entered something like: %s', data);
+                  }
+              });
+          });
+          server.listen(8124, 'localhost');
+
+    %section.slide#http
+      %h2 Simple Http server
+      %pre.prettyprint
+        :escaped
+          var http = require('http');
+
+          http.createServer(function (req, res) {
+
+              res.writeHead(200, { 'Content-Type': 'text/html' });
+              res.write("<h1>With love from Node.Js</h1>");
+              res.end();
+
+          }).listen(8080, "127.0.0.1");
+          console.log('Server running at http://127.0.0.1:8080/');
+
+    %section.slide#more-http
+      %h2 More complicated Http server
+      %pre.prettyprint
+        :escaped
+          var spawn = require('child_process').spawn,
+              filename = process.ARGV[2],
+              http = require("http");
+
+          if (!filename)
+              return sys.puts("Usage: node watcher.js filename");
+
+          var tail = spawn("tail", ["-f", filename]);
+          console.log("start tailing");
+
+          http.createServer(function(req,res){
+              res.writeHeader(200,{"Content-Type": "text/plain"});
+
+              tail.stdout.on("data", function (data) {
+                  res.write(data);
+              });
+
+          }).listen(8000);
+          console.log("listening on "+8000);
+
+    %section.slide#modules
+      %h2 Modules
+      %ul
+        %li
+          There are a lot modules ...
+          %ul 
+            %li socket.io
+            %li express.js
+            %li 
+              and so on ...
+              %a{:href=>"https://github.com/joyent/node/wiki/modules"} https://github.com/joyent/node/wiki/modules
+        %li.slide 
+          Use npm (Node package manager)
+          %a{:href=>"http://npmjs.org"} http://npmjs.org
+
+    %section.slide#end
+      %h1 can I haz Questions?
+      
+    %a{ :href=>"#", :class=>"deck-prev-link", :title=>"Previous"} &#8592;
+    %a{ :href=>"#", :class=>"deck-next-link", :title=>"Next"} &#8594;
+
+    %p{:class=>"deck-status"}
+      %span{:class=>"deck-status-current"}
+      
+      %span{:class=>"deck-status-total"}
+
+    %form{:action=>".", :method=>"get", :class=>"goto-form"}
+      %label{:for=>"goto-slide"} Go to slide:
+      %input{:type=>"number", :name=>"slidenum", :id=>"goto-slide"}
+      %input{:type=>"submit", :value=>"Go"}
+    
+    %a{ :href=>".", :title=>"Permalink to this slide", :class=>"deck-permalink"}#
+      
+    %script{:src=>"javascript/modernizr.custom.js"}
+    %script{:src=>"javascript/jquery-1.6.4.min.js"}
+    %script{:src=>"javascript/prettify.js"}
+    %script{:src=>"javascript/core/deck.core.js"}
+    %script{:src=>"javascript/extensions/menu/deck.menu.js"}
+    %script{:src=>"javascript/extensions/goto/deck.goto.js"}
+    %script{:src=>"javascript/extensions/status/deck.status.js"}
+    %script{:src=>"javascript/extensions/navigation/deck.navigation.js"}
+    %script{:src=>"javascript/extensions/hash/deck.hash.js"}
+
+    %script{:src=>"javascript/pres.js"}

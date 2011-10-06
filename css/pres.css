@@ -1,0 +1,56 @@
+body {
+  height: 100%; }
+
+.deck-container .slide div.primary {
+  position: absolute;
+  top: 0;
+  left: 0; }
+  .deck-container .slide div.primary div {
+    width: 1024px;
+    height: 600px;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell; }
+    .deck-container .slide div.primary div img {
+      max-width: 100%;
+      max-height: 100%; }
+
+.deck-container aside {
+  display: none; }
+
+.deck-container.with-asides aside {
+  display: block; }
+
+.deck-container aside {
+  text-align: left;
+  padding: 10px;
+}
+
+.deck-container aside {
+  float: left; }
+
+.smooth-images img, .smooth-images aside {
+  visibility: hidden;
+  opacity: 0; }
+.smooth-images.deck-current .primary:first-child img, .smooth-images.deck-current .primary:first-child aside {
+  opacity: 1;
+  visibility: visible; }
+.smooth-images .primary .deck-current img, .smooth-images .primary .deck-current aside {
+  opacity: 1;
+  visibility: visible; }
+
+.maze-demo {
+  text-align: center; }
+
+.maze-demo canvas {
+  border: 1px solid #777;
+  vertical-align: middle;
+  margin-top: 100px; }
+
+#thanks h1 {
+  color: #222;
+  text-shadow: 5px 5px 5px #000; }
+
+.fixme {
+  color: #f00;
+  font-weight: bold; }

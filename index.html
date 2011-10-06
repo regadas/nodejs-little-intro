@@ -1,75 +1,426 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset='utf-8'>
-
-  <title>regadas/nodejs-little-intro @ GitHub</title>
-
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #105139;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #ffffff;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #efaec6; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #efaec6; }
-    h3 { text-align: center; color: #efaec6; }
-    a { color: #efaec6; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
-</head>
-
-<body>
-  <a href="http://github.com/regadas/nodejs-little-intro"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-
-  <div id="container">
-
-    <div class="download">
-      <a href="http://github.com/regadas/nodejs-little-intro/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/regadas/nodejs-little-intro/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
-
-    <h1><a href="http://github.com/regadas/nodejs-little-intro">nodejs-little-intro</a>
-      <span class="small">by <a href="http://github.com/regadas">regadas</a></span></h1>
-
-    <div class="description">
-      Node.js little introduction
-    </div>
-
-    <h2>Contact</h2>
-<p>Filipe Regadas (filiperegadas@gmail.com)<br/>      </p>
-
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/regadas/nodejs-little-intro/zipball/master">zip</a> or
-      <a href="http://github.com/regadas/nodejs-little-intro/tarball/master">tar</a> formats.
+  <head>
+    <meta charset='utf-8' />
+    <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible' />
+    <title>Node.js</title>
+    <meta content='width=1024, user-scalable=no' name='viewport' />
+    <link href='css/core/deck.core.css' rel='stylesheet' />
+    <link href='css/extensions/goto/deck.goto.css' rel='stylesheet' />
+    <link href='css/extensions/menu/deck.menu.css' rel='stylesheet' />
+    <link href='css/extensions/status/deck.status.css' rel='stylesheet' />
+    <link href='css/extensions/hash/deck.hash.css' rel='stylesheet' />
+    <link href='css/neon.css' id='style-theme-link' rel='stylesheet' />
+    <link href='css/fade.css' id='transition-theme-link' rel='stylesheet' />
+    <link href='css/pres.css' rel='stylesheet' />
+    <link href='css/sunburst.css' rel='stylesheet' />
+  </head>
+  <body class='deck-container with-asides' onload='prettyPrint()'>
+    <section class='slide' id='title-slide'>
+      <img src='images/nodejs.png' />
+      <div id='my-info'>
+        <h3>Hello, I'm Filipe Regadas</h3>
+        <h4>
+          <a href='#'>filipe (at) regadas (d0t) org</a>
+        </h4>
+        <h4>
+          <a href='http://filipe.regadas.org'>http://filipe.regadas.org</a>
+        </h4>
+        <h4>
+          <a href='http://github.com/regadas'>http://github.com/regadas</a>
+        </h4>
+        <h4>
+          <a href='http://twitter.com/regadas'>@regadas</a>
+        </h4>
+        <h4>
+          <a href='http://groups.google.com/group/nodejs-pt'>nodejs-pt</a>
+        </h4>
+        <h4>
+          <a href='http://groups.google.com/group/scala-pt'>scala-pt</a>
+        </h4>
+      </div>
+    </section>
+    <section class='slide' id='this-is-not'>
+      <h1>This is not ...</h1>
+    </section>
+    <section class='slide' id='in-brief'>
+      <h2>in brief ...</h2>
+      <aside>
+        <ul>
+          <li>
+            <p>Started by Ryan Dahl</p>
+          </li>
+          <li>
+            <p>Server-side Javascript</p>
+          </li>
+          <li>
+            <p>Built on Google V8</p>
+          </li>
+          <li>
+            <p>Evented, non blocking I/o</p>
+          </li>
+          <li>
+            <p>Similar to Twisted or EventMachine</p>
+          </li>
+          <li>
+            <p>CommonJS module system</p>
+          </li>
+        </ul>
+      </aside>
+      <aside>
+        <img src='images/ryan.jpg' />
+      </aside>
+    </section>
+    <section class='slide' id='reason'>
+      <h2>Reason ...</h2>
+      <ul>
+        <li>
+          <p>Normally programs behave like this ...</p>
+          <pre class='prettyprint'>var result = db.query("select ...");&#x000A;</pre>
+        </li>
+      </ul>
+    </section>
+    <section class='slide' id='more-reason'>
+      <h2>More Reasons ...</h2>
+      <ul>
+        <li>
+          <p>I/O needs to be done differently</p>
+        </li>
+        <li>
+          <p>Better software multitask</p>
+        </li>
+        <li>
+          <p>Threads are cool! many can run at the same time</p>
+        </li>
+        <li>
+          <p>We have many differents types so .... CHOOSE YOUR DESTINY!</p>
+        </li>
+        <li>
+          <p>Context switch is not for free!!</p>
+        </li>
+        <li>
+          <p>Stacks can eat a lot of memory</p>
+        </li>
+        <li>
+          <p>Nasty locking problems</p>
+        </li>
+      </ul>
+    </section>
+    <section class='slide'>
+      <h1>Building lightweight scalable network application can be cumbersome!</h1>
+    </section>
+    <section class='slide'>
+      <h1>What about event loop?</h1>
+    </section>
+    <section class='slide'>
+      <h1>Real world apps use it ...</h1>
+    </section>
+    <section class='slide'>
+      <h1>
+        <img src='images/nginx.jpg' />
+      </h1>
+    </section>
+    <section class='slide'>
+      <h1>
+        <img src='images/nginx-chart1.png' />
+      </h1>
+      <a href='http://blog.webfaction.com/a-little-holiday-present'>taken from webfaction</a>
+    </section>
+    <section class='slide'>
+      <h1>
+        <img src='images/nginx-chart2.png' />
+      </h1>
+      <a href='http://blog.webfaction.com/a-little-holiday-present'>taken from webfaction</a>
+    </section>
+    <section class='slide'>
+      <h1>Awesome :)</h1>
+    </section>
+    <section class='slide' id='more-more-reason'>
+      <h2>So ...</h2>
+      <ul>
+        <li>
+          <p>Code like this ...</p>
+          <pre class='prettyprint'>var result = db.query("select ...");</pre>
+        </li>
+        <li>
+          <p>We have to do some multitask</p>
+        </li>
+      </ul>
+      <ul class='slide'>
+        <li>
+          <p>But code like this ...</p>
+          <pre class='prettyprint'>db.query("select ...", function(result){&#x000A;   // do some awesome stuff with result&#x000A;});</pre>
+        </li>
+        <li>
+          <p>returns to the event loop</p>
+        </li>
+      </ul>
+    </section>
+    <section class='slide'>
+      <h1>Why isn't this used more?</h1>
+    </section>
+    <section class='slide' id='cultural'>
+      <h2>Cultural Bias ...</h2>
+      <ul>
+        <li>
+          <p>The first type of programs that we are taught to do</p>
+          <pre class='prettyprint'>var str = stdin.gets()
+          var resp = http_client.post(&quot;http://some.awesome.host.com/str&quot;, {data: str})
+          if(resp == 200) {
+            // do other stuff
+          } else {
+            // handle error
+          }</pre>
+        </li>
+      </ul>
+    </section>
+    <section class='slide' id='cultural-cont'>
+      <h2>Cultural Bias ...</h2>
+      <ul>
+        <li>
+          <p>But what about this?</p>
+          <pre class='prettyprint'>stdin.gets(function(str) {
+            http_client.post(&quot;http://some.awesome.host.com/str&quot;, {data: str}, function(resp) {
+              if(resp == 200) {
+                // do other stuff
+              } else {
+                // handle error
+              }
+            })
+          })</pre>
+        </li>
+        <li class='slide'>
+          <p>Many ppl think and tend to run away</p>
+        </li>
+      </ul>
+    </section>
+    <section class='slide' id='infra'>
+      <h2>Infrastructure</h2>
+      <ul>
+        <li>
+          <p>Event loop requires non-blocking I/O</p>
+        </li>
+        <li>
+          <p>But ... Most libs aren't</p>
+        </li>
+      </ul>
+    </section>
+    <section class='slide' id='infra'>
+      <h2>More ...</h2>
+      <ul>
+        <li>
+          <p>Twisted and EventMachine are good event loop platforms</p>
+        </li>
+        <li>
+          <p>We can get all the good stuff</p>
+        </li>
+        <li>
+          <p>You must understand ao to integrate other libs</p>
+        </li>
+        <li>
+          <p>You need to know about event loops</p>
+        </li>
+      </ul>
+    </section>
+    <section class='slide' id='js'>
+      <h2>JavaScript</h2>
+      <ul>
+        <li>
+          <p>Evented Language</p>
+        </li>
+        <li>
+          <p>Anonymous functions and closures</p>
+        </li>
+        <li>
+          <p>One callback at a time</p>
+        </li>
+        <li>
+          <p>No need to lock on vars</p>
+        </li>
+        <li>
+          <p>I/O is done through callbacks</p>
+        </li>
+      </ul>
+    </section>
+    <section class='slide' id='node'>
+      <h1>
+        <img src='images/nodejs.png' />
+      </h1>
+    </section>
+    <section class='slide' id='nodejs-built'>
+      <h2>built to ..</h2>
+      <ul>
+        <li>
+          <p>Provide a purely evented env</p>
+        </li>
+        <li>
+          <p>Be "non-block"</p>
+        </li>
+        <li>
+          <p>Be "higly-concurrent"</p>
+        </li>
+        <li>
+          <p>Provides the missing infrastructure</p>
+        </li>
+      </ul>
+    </section>
+    <section class='slide' id='design'>
+      <h2>Design</h2>
+      <ul>
+        <li>
+          <p>Does not make I/O directly</p>
+        </li>
+        <li>
+          <p>It's low level</p>
+        </li>
+        <li>
+          <p>Stream everything</p>
+        </li>
+        <li>
+          <p>
+            JS familiar API i.e
+            <strong>setTimeout</strong>
+          </p>
+        </li>
+        <li>
+          <p>Platform independent</p>
+        </li>
+        <li>
+          <p>Built-in support for</p>
+          <ul>
+            <li>TCP</li>
+            <li>DNS</li>
+            <li>HTTP</li>
+            <li>UDP</li>
+            <li>...</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+    <section class='slide' id='hello'>
+      <h2>Hello World</h2>
+      <pre class='prettyprint'>setTimemout(function(){
+        console.log(&quot;World&quot;)
+      }, 2000)
+      console.log(&quot;Hello&quot;)</pre>
+    </section>
+    <section class='slide' id='another-hello'>
+      <h2>Another Hello World</h2>
+      <pre class='prettyprint'>var EventEmitter = require('events').EventEmitter,
+          emitter = new EventEmitter();
+      
+      setTimeout(function(){
+        emitter.emit(&quot;say&quot;, &quot;Hello World&quot;)
+      }, 2000) 
+      
+      emitter.addListener(&quot;say&quot;, function(what){
+        console.log(what)
+      })</pre>
+    </section>
+    <section class='slide' id='tcp'>
+      <h2>Simple TCP Server</h2>
+      <pre class='prettyprint'>var net = require('net');
+      
+      String.prototype.chomp = function (){
+        return this.replace(/(\n|\r)+$/, '');
+      }
+      
+      var server = net.createServer(function (c) {
+          c.on(&quot;connect&quot;, function () {
+              console.info(&quot;Connection from &quot; + c.remoteAddress);
+              c.write(&quot;Hello Stranger\n&quot;);
+          });
+          c.on('data', function(data){
+              if(data.toString().chomp() === 'trigger timer') {
+                setTimeout(function() {
+                  c.write(&quot;Hey man here I am after 2 seconds\n&quot;);
+                }, 2000)
+              } else {
+                console.log('Stranger entered something like: %s', data);
+              }
+          });
+      });
+      server.listen(8124, 'localhost');</pre>
+    </section>
+    <section class='slide' id='http'>
+      <h2>Simple Http server</h2>
+      <pre class='prettyprint'>var http = require('http');
+      
+      http.createServer(function (req, res) {
+      
+          res.writeHead(200, { 'Content-Type': 'text/html' });
+          res.write(&quot;&lt;h1&gt;With love from Node.Js&lt;/h1&gt;&quot;);
+          res.end();
+      
+      }).listen(8080, &quot;127.0.0.1&quot;);
+      console.log('Server running at http://127.0.0.1:8080/');</pre>
+    </section>
+    <section class='slide' id='more-http'>
+      <h2>More complicated Http server</h2>
+      <pre class='prettyprint'>var spawn = require('child_process').spawn,
+          filename = process.ARGV[2],
+          http = require(&quot;http&quot;);
+      
+      if (!filename)
+          return sys.puts(&quot;Usage: node watcher.js filename&quot;);
+      
+      var tail = spawn(&quot;tail&quot;, [&quot;-f&quot;, filename]);
+      console.log(&quot;start tailing&quot;);
+      
+      http.createServer(function(req,res){
+          res.writeHeader(200,{&quot;Content-Type&quot;: &quot;text/plain&quot;});
+      
+          tail.stdout.on(&quot;data&quot;, function (data) {
+              res.write(data);
+          });
+      
+      }).listen(8000);
+      console.log(&quot;listening on &quot;+8000);</pre>
+    </section>
+    <section class='slide' id='modules'>
+      <h2>Modules</h2>
+      <ul>
+        <li>
+          There are a lot modules ...
+          <ul>
+            <li>socket.io</li>
+            <li>express.js</li>
+            <li>
+              and so on ...
+              <a href='https://github.com/joyent/node/wiki/modules'>https://github.com/joyent/node/wiki/modules</a>
+            </li>
+          </ul>
+        </li>
+        <li class='slide'>
+          Use npm (Node package manager)
+          <a href='http://npmjs.org'>http://npmjs.org</a>
+        </li>
+      </ul>
+    </section>
+    <section class='slide' id='end'>
+      <h1>can I haz Questions?</h1>
+    </section>
+    <a class='deck-prev-link' href='#' title='Previous'>&#8592;</a>
+    <a class='deck-next-link' href='#' title='Next'>&#8594;</a>
+    <p class='deck-status'>
+      <span class='deck-status-current'></span>
+      <span class='deck-status-total'></span>
     </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/regadas/nodejs-little-intro</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/regadas/nodejs-little-intro">regadas/nodejs-little-intro</a>
-    </div>
-
-  </div>
-
-  
-</body>
+    <form action='.' class='goto-form' method='get'>
+      <label for='goto-slide'>Go to slide:</label>
+      <input id='goto-slide' name='slidenum' type='number' />
+      <input type='submit' value='Go' />
+    </form>
+    <a class='deck-permalink' href='.' title='Permalink to this slide'>#</a>
+    <script src='javascript/modernizr.custom.js'></script>
+    <script src='javascript/jquery-1.6.4.min.js'></script>
+    <script src='javascript/prettify.js'></script>
+    <script src='javascript/core/deck.core.js'></script>
+    <script src='javascript/extensions/menu/deck.menu.js'></script>
+    <script src='javascript/extensions/goto/deck.goto.js'></script>
+    <script src='javascript/extensions/status/deck.status.js'></script>
+    <script src='javascript/extensions/navigation/deck.navigation.js'></script>
+    <script src='javascript/extensions/hash/deck.hash.js'></script>
+    <script src='javascript/pres.js'></script>
+  </body>
 </html>
