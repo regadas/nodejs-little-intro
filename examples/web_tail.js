@@ -1,22 +1,21 @@
-var spawn = require('child_process').spawn;
+var spawn = require('child_process').spawn,
+          filename = process.ARGV[2],
+          http = require("http");
 
-var filename = process.ARGV[2];
+var server_port = 8000;
 
 if (!filename)
-    return sys.puts("Usage: node watcher.js filename");
+    return console.log("Usage: node watcher.js filename");
 
-// Look at http://nodejs.org/api.html#_child_processes for detail.
 var tail = spawn("tail", ["-f", filename]);
-console.log("start tailing");
 
-// From nodejs.org/jsconf.pdf slide 56
-var http = require("http");
-    http.createServer(function(req,res){
-    res.writeHeader(200,{"Content-Type": "text/plain"});
+http.createServer(function(req,res){
+    res.writeHeader(200,{"Content-Type": "text/plain;charset=UTF-8"});
 
     tail.stdout.on("data", function (data) {
+        console.log(data.toString())
         res.write(data);
     });
 
-}).listen(8000);
-console.log("listening on "+8000);
+}).listen(server_port);
+console.log("listening on "+server_port);
