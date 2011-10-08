@@ -358,24 +358,26 @@
     <section class='slide' id='more-http'>
       <h2>More complicated Http server</h2>
       <pre class='prettyprint'>var spawn = require('child_process').spawn,
-          filename = process.ARGV[2],
-          http = require(&quot;http&quot;);
+                filename = process.ARGV[2],
+                http = require(&quot;http&quot;);
+      
+      var server_port = 8000;
       
       if (!filename)
-          return sys.puts(&quot;Usage: node watcher.js filename&quot;);
+          return console.log(&quot;Usage: node watcher.js filename&quot;);
       
       var tail = spawn(&quot;tail&quot;, [&quot;-f&quot;, filename]);
-      console.log(&quot;start tailing&quot;);
       
       http.createServer(function(req,res){
-          res.writeHeader(200,{&quot;Content-Type&quot;: &quot;text/plain&quot;});
+          res.writeHeader(200,{&quot;Content-Type&quot;: &quot;text/plain;charset=UTF-8&quot;});
       
           tail.stdout.on(&quot;data&quot;, function (data) {
+              console.log(data.toString())
               res.write(data);
           });
       
-      }).listen(8000);
-      console.log(&quot;listening on &quot;+8000);</pre>
+      }).listen(server_port);
+      console.log(&quot;listening on &quot;+server_port);</pre>
     </section>
     <section class='slide' id='modules'>
       <h2>Modules</h2>
